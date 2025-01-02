@@ -24,7 +24,7 @@ Welcome to **My Bash Master Genius**, the ultimate `.bashrc` setup designed to s
 
 1. Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/<your-username>/my-bash-master-genius.git
+   git clone https://github.com/MalakaSupun/my-bash-master-genius.git
    ```
 
 2. Navigate to the project directory:

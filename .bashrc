@@ -1,0 +1,1 @@
+/home/malaka/linuxtoolbox/mybash/.bashrc

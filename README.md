@@ -81,3 +81,11 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Enhance your terminal game with **My Bash Master Genius**. Happy scripting! 🎉
+
+
+## 🌱 Reference
+
+For a comprehensive guide on enhancing your terminal experience, check out this video by Chris Titus Tech: [Boost Your Terminal with Bash](https://youtu.be/0phdCAFFicY?si=i56wyJ2H_uSccCE_). Chris provides valuable insights and tips that complement the features of **My Bash Master Genius**.
+ـــــــــــــــﮩ٨ـ❤️️
+
+---

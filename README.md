@@ -1,6 +1,12 @@
-![My Bash Master Genius Logo](assets/Images/My_Bash_Master_Genius_02.png)
+#
+<p align="center">
+       <img width="1024" src='assets/Images/My_Bash_Master_Genius_02.png' alt="Logo">
+</p>
 
-# My Bash Master Genius
+<h1 align="center">
+  My Bash Master Genius.
+</h1>
+
 
 Welcome to **My Bash Master Genius**, the ultimate `.bashrc` setup designed to supercharge your terminal experience. This project showcases a custom `.bashrc` configuration that brings enhanced functionality, powerful aliases, and seamless workflows for developers, engineers, and enthusiasts.
 
@@ -49,7 +55,9 @@ Welcome to **My Bash Master Genius**, the ultimate `.bashrc` setup designed to s
 
 ## 🎨 Project Logo
 
-![My Bash Master Genius Logo](assets/Images/My_Bash_Master_Genius_logo_01.png)
+<p align="center">
+       <img width="400" src='assets/Images/My_Bash_Master_Genius_logo_01.png' alt="Logo">
+</p>
 
 The logo embodies the spirit of customisation and the power of Bash.
 

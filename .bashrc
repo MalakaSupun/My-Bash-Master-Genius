@@ -63,7 +63,7 @@ export VISUAL=nvim
 alias spico='sedit'
 alias nano='edit'
 alias snano='sedit'
-alias vim='nvim'
+alias vim='nvim'o
 
 # Replace batcat with cat on Fedora as batcat is not available as a RPM in any form
 if command -v lsb_release >/dev/null; then
@@ -106,13 +106,16 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 #######################################################
 alias act_ImageProcessing_01='source /home/malaka/Projects/Python_Projects/Python_venvs/Image_processing_01/bin/activate'
 alias act_gameVenv_01='source /home/malaka/Projects/Python_Projects/Python_venvs/game_venv_01/bin/activate'
-# alias deact_env='deactivate'
+alias act_llm_01='source /media/malaka/MALAKA_02/Python_Envs/envLLM/bin/activate'
+alias dact='deactivate'
 
 alias home='cd ~'
 
-alias opendir="nautilus ."
-alias pip_f='pip list | grep '
-alias apt_f='apt list | grep ' 
+alias gpu_stat='nvitopcls'
+
+alias open="nautilus ."
+alias pip-f='pip list | grep '
+alias apt-f='apt list | grep ' 
 alias edit='gnome-text-editor '
 alias sedit='sudo gnome-text-editor '
 alias edge='microsoft-edge-stable'
@@ -122,22 +125,22 @@ alias hlp='less ~/.bashrc_help'            		# Show help for this .bashrc file
 alias openD='nautilus /media/malaka/MALAKA_01'	# Open the D: directory
 alias openE='nautilus /media/malaka/MALAKA_02'	# Open the E: directory
 
-alias Win_Downloads='nautilus /media/malaka/Windows/Users/HP/Downloads'
-alias cd_windown='cd /media/malaka/Windows/Users/HP/Downloads'
-alias Ai_direct='nautilus /media/malaka/MALAKA_02/AI'
+alias Win-Downloads='nautilus /media/malaka/Windows/Users/HP/Downloads'
+alias cd-windown='cd /media/malaka/Windows/Users/HP/Downloads'
+alias Ai-direct='nautilus /media/malaka/MALAKA_02/AI'
 
 #Commands for Phone ..
 alias phone_tele='nautilus /run/user/1000/gvfs/mtp:host=Xiaomi_Mi_9T_Pro_d491c4c/Internal\ shared\ storage/Download/Telegram/'
-alias open_phone='nautilus /run/user/1000/gvfs/mtp:host=Xiaomi_Mi_9T_Pro_d491c4c/'
-alias cd_phone='cd /run/user/1000/gvfs/mtp:host=Xiaomi_Mi_9T_Pro_d491c4c/'
+alias open_phone='nautilus /run/user/1000/gvfs/mtp:host=Xiaomi_Mi_9T_Pro_d491c4c'
+alias cd-phone='cd /run/user/1000/gvfs/mtp:host=Xiaomi_Mi_9T_Pro_d491c4c'
 
 alias projects='cd /home/malaka/Projects/'
 
-alias cd_D='cd /media/malaka/MALAKA_01'
-alias cd_E='cd /media/malaka/MALAKA_02'
+alias cd-D='cd /media/malaka/MALAKA_01'
+alias cd-E='cd /media/malaka/MALAKA_02'
 
-alias cp_lf='rsync -ah --info=progress2'
-alias mv_lf='rsync -ah --info=progress2 --remove-source-files'
+alias cp-lf='rsync -ah --info=progress2'
+alias mv-lf='rsync -ah --info=progress2 --remove-source-files'
 
 alias mydisks='folder_contents /media/malaka'
 
@@ -229,6 +232,9 @@ alias 777='chmod -R 777'
 
 # Search command line history
 alias h="history | grep "
+
+# SSH Connectors
+alias sshlogings="last | grep 'pts'"
 
 # Search running processes
 alias p="ps aux | grep "
@@ -696,3 +702,80 @@ function folder_contents() {
     fi
 }
 ##################################################
+
+
+export PATH=/usr/local/cuda-12.5/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.5/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+export PATH=/usr/local/cuda-12.5/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-12/lib64:$LD_LIBRARY_PATHexport LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
+
+pip_dl_install() {
+    local package=""
+    local download_dir="/media/malaka/MALAKA_02/Python_Envs/Py_Pip_Packs/Linux/"  # Default path
+    local proxy_url=""
+
+    # Parse arguments (package name and optional -d=<path>)
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -d=*|--dir=*)
+                download_dir="${1#*=}"
+                shift
+                ;;
+            *)
+                if [[ -z "$package" ]]; then
+                    package="$1"
+                else
+                    echo "Warning: Ignoring extra argument '$1'"
+                fi
+                shift
+                ;;
+        esac
+    done
+
+    if [[ -z "$package" ]]; then
+        echo "Error: Package name is required."
+        echo "Usage: pip_dl_install <package> [-d=<download_dir>]"
+        return 1
+    fi
+
+    # Ask user about proxy first
+    read -p "Do you want to use a proxy? (y/n): " use_proxy
+    
+    if [[ "$use_proxy" =~ ^[Yy] ]]; then
+        # Check for system proxy settings
+        if [[ -n "$http_proxy" ]]; then
+            proxy_url="$http_proxy"
+            echo "Using system proxy: $proxy_url"
+        elif [[ -n "$https_proxy" ]]; then
+            proxy_url="$https_proxy"
+            echo "Using system proxy: $proxy_url"
+        elif [[ -n "$ALL_PROXY" ]]; then
+            proxy_url="$ALL_PROXY"
+            echo "Using system proxy: $proxy_url"
+        else
+            # Prompt for custom proxy
+            read -e -i "192.168." -p "Enter proxy host or full URL (e.g., 192.168.189.10): " proxy_host
+            read -e -i "44355" -p "Enter proxy port: " proxy_port
+            proxy_url="http://${proxy_host}:${proxy_port}"  # Fixed: No redundant host append
+            echo "Using custom proxy: $proxy_url"
+        fi
+    else
+        echo "Proceeding without a proxy."
+    fi
+
+    # Ensure download directory exists
+    mkdir -p "$download_dir" || {
+        echo "Error: Failed to create directory '$download_dir'"
+        return 1
+    }
+
+    # Download and install
+    echo "Downloading to: $download_dir"
+    if [[ -n "$proxy_url" ]]; then
+        pip download -d "$download_dir" --proxy "$proxy_url" "$package"
+    else
+        pip download -d "$download_dir" "$package"
+    fi && \
+    pip install "$package" --no-index --find-link="$download_dir"
+}

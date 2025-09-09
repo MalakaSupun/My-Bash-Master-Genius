@@ -11,3 +11,4 @@ Data_sets/
 # Ignore system files
 .DS_Store
 *.swp
+*.deb

@@ -46,6 +46,11 @@ Welcome to **My Bash Master Genius**, the ultimate `.bashrc` setup designed to s
    ```bash
    source ~/.bashrc
    ```
+6. Copy the `starship.toml` file to `~/config/`.
+   ```bash
+   cp starship.toml ~/config/starship.toml
+   ```
+   
 
 ## 📁 Repository Structure
 
